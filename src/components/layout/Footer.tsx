@@ -21,9 +21,9 @@ const supportLinks = [
 ];
 
 const socials = [
-  { Icon: LogoTwitter, href: "#" },
-  { Icon: LogoFacebook, href: "#" },
-  { Icon: LogoInstagram, href: "#" },
+  { Icon: LogoTwitter, href: "https://x.com/wastewiseincltd" },
+  { Icon: LogoFacebook, href: "https://www.facebook.com/me/" },
+  { Icon: LogoInstagram, href: "https://www.instagram.com/wastewise238" },
   { Icon: LogoLinkedin, href: "#" },
 ];
 
@@ -48,6 +48,8 @@ export default function Footer() {
                 <motion.a
                   key={i}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="w-11 h-11 flex items-center justify-center bg-white/5 border border-white/10 rounded-full"
                   whileHover={{ scale: 1.1, borderColor: "rgba(9,179,9,0.4)" }}
                   whileTap={{ scale: 0.95 }}
