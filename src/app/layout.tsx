@@ -1,24 +1,39 @@
 import type { Metadata } from "next";
-import { Inter, Rethink_Sans, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import LenisProvider from "@/components/providers/LenisProvider";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import "./globals.css";
 
-const inter = Inter({
+const inter = localFont({
   variable: "--font-inter",
-  subsets: ["latin"],
+  src: [
+    { path: "./fonts/inter-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/inter-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/inter-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/inter-700.woff2", weight: "700", style: "normal" },
+  ],
 });
 
-const rethinkSans = Rethink_Sans({
+const rethinkSans = localFont({
   variable: "--font-rethink",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  src: [
+    { path: "./fonts/rethink-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/rethink-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/rethink-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/rethink-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/rethink-800.woff2", weight: "800", style: "normal" },
+  ],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const plusJakarta = localFont({
   variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  src: [
+    { path: "./fonts/jakarta-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/jakarta-500.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/jakarta-600.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/jakarta-700.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/jakarta-800.woff2", weight: "800", style: "normal" },
+  ],
 });
 
 export const metadata: Metadata = {
