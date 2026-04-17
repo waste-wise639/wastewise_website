@@ -310,9 +310,9 @@ export default function WaitlistStep1() {
             Referral Code
           </label>
           <input
-            disabled
-            defaultValue="RIWAMA_Rivers"
-            className="h-[44px] px-4 rounded-[12px] border border-[#E3E8E3] dark:border-[#2A352A] !bg-[#F5F5F5] dark:!bg-[#1A211A] text-[14px] !text-[#171C1A] dark:!text-white/60 outline-none cursor-not-allowed !opacity-100"
+            {...register("referralCode")}
+            placeholder="Enter referral code"
+            className="h-[44px] px-4 rounded-[12px] border border-[#E3E8E3] dark:border-[#2A352A] bg-white dark:bg-[#0F1210] text-[14px] text-[#171C1A] dark:text-white placeholder:text-[#6D7873] outline-none focus:border-[#09B309] focus:ring-2 focus:ring-[#09B309]/10 transition-all"
           />
         </div>
       </div>

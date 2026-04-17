@@ -15,9 +15,9 @@ export async function submitWaitlist(formData: WaitlistFormData) {
   // Step 1 — Personal Info
   fd.append("fullname", formData.fullName);
   fd.append("email", formData.email);
-  // Strip spaces and ensure +234 prefix
-  const rawPhone = formData.phone.replace(/\s/g, "").replace(/^0+/, "");
-  const phone = rawPhone.startsWith("+234") ? rawPhone : `+234${rawPhone}`;
+  // Strip spaces and +234 prefix, send as local Nigerian format 0XXXXXXXXXX
+  const rawPhone = formData.phone.replace(/\s/g, "").replace(/^\+234/, "").replace(/^234/, "").replace(/^0+/, "");
+  const phone = `0${rawPhone}`;
   fd.append("phone", phone);
   fd.append("business_name", formData.businessName);
   fd.append("business_type", formData.businessType);
@@ -42,9 +42,14 @@ export async function submitWaitlist(formData: WaitlistFormData) {
   }
 
   // Step 3 — Operations
-  // Send each waste type as lowercase
-  const wasteTypes = formData.wasteTypes.map(w => w.toLowerCase());
-  fd.append("type_of_waste", wasteTypes.join(","));
+  // Backend expects a single waste type value, normalize special cases
+  const normalizeWasteType = (w: string) => {
+    const lower = w.toLowerCase();
+    if (lower === "e-waste") return "ewaste";
+    return lower;
+  };
+  const firstWasteType = formData.wasteTypes[0] ? normalizeWasteType(formData.wasteTypes[0]) : "";
+  fd.append("type_of_waste", firstWasteType);
   fd.append("collection_vehicle", formData.ownsVehicles === "yes" ? "1" : "0");
   fd.append("number_of_collection_vehicle", formData.numberOfVehicles || "0");
   // capacity expects: daily, weekly, or monthly

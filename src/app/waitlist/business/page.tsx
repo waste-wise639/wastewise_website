@@ -55,10 +55,53 @@ export default function WaitlistStep2() {
 
   const [idFile, setIdFile] = useState<File | null>(formData.idDocument);
   const [businessFile, setBusinessFile] = useState<File | null>(formData.businessDocument);
+  const [idError, setIdError] = useState("");
+  const [businessError, setBusinessError] = useState("");
   const idInputRef = useRef<HTMLInputElement>(null);
   const businessInputRef = useRef<HTMLInputElement>(null);
 
+  const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+
+  const validateFile = (file: File | null): string => {
+    if (!file) return "";
+    if (file.size > MAX_FILE_SIZE) return "File too large — max 2MB";
+    return "";
+  };
+
+  const handleIdFileChange = (f: File | null) => {
+    const err = validateFile(f);
+    if (err) {
+      setIdError(err);
+      setIdFile(null);
+      return;
+    }
+    setIdFile(f);
+    setIdError("");
+  };
+
+  const handleBusinessFileChange = (f: File | null) => {
+    const err = validateFile(f);
+    if (err) {
+      setBusinessError(err);
+      setBusinessFile(null);
+      return;
+    }
+    setBusinessFile(f);
+    setBusinessError("");
+  };
+
   const onSubmit = (data: Step2Fields) => {
+    let hasError = false;
+    if (!idFile) {
+      setIdError("ID document is required");
+      hasError = true;
+    }
+    if (!businessFile) {
+      setBusinessError("Business document is required");
+      hasError = true;
+    }
+    if (hasError) return;
+
     updateFormData({
       ...data,
       idDocument: idFile,
@@ -221,13 +264,22 @@ export default function WaitlistStep2() {
         {/* Upload ID */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[14px] font-semibold leading-[20px] text-[#171C1A] dark:text-white">
-            Upload ID (NIN / Voter&apos;s Card / Driver&apos;s License)
+            Upload ID (NIN / Voter&apos;s Card / Driver&apos;s License) <span>*</span>
           </label>
           <FileUploadZone
             file={idFile}
-            onFileChange={setIdFile}
+            onFileChange={handleIdFileChange}
             inputRef={idInputRef}
           />
+          {idError && (
+            <motion.span
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-[12px] text-red-500"
+            >
+              {idError}
+            </motion.span>
+          )}
         </div>
 
         {/* Upload Business Documents */}
@@ -237,9 +289,18 @@ export default function WaitlistStep2() {
           </label>
           <FileUploadZone
             file={businessFile}
-            onFileChange={setBusinessFile}
+            onFileChange={handleBusinessFileChange}
             inputRef={businessInputRef}
           />
+          {businessError && (
+            <motion.span
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-[12px] text-red-500"
+            >
+              {businessError}
+            </motion.span>
+          )}
         </div>
       </div>
 
@@ -351,7 +412,7 @@ function FileUploadZone({
             Click or drag and drop here
           </p>
           <p className="text-[10px] text-[#52525B]">
-            .png, .jpg .svg up to 5MB
+            .png, .jpg, .pdf up to 2MB
           </p>
         </>
       )}

@@ -45,16 +45,14 @@ export default function WaitlistStep3() {
 
   const toggleWasteType = (type: string) => {
     setWasteError("");
-    setSelectedWasteTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
-    );
+    setSelectedWasteTypes([type]);
   };
 
   const onSubmit = (data: Step3Fields) => {
     let hasError = false;
 
     if (selectedWasteTypes.length === 0) {
-      setWasteError("Select at least one waste type");
+      setWasteError("Select a waste type");
       hasError = true;
     }
     if (!ownsVehicles) {
@@ -97,7 +95,7 @@ export default function WaitlistStep3() {
 
       {/* Form Fields */}
       <div className="flex flex-col gap-5 pb-2">
-        {/* Type of Waste Handled — pill multi-select */}
+        {/* Type of Waste Handled — pill single-select */}
         <div className="flex flex-col gap-1.5">
           <label className="text-[14px] font-semibold leading-[20px] text-[#171C1A] dark:text-white">
             Type of Waste Handled <span>*</span>

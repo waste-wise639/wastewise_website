@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 
-function TeamCard({ member, index }: { member: { name: string; role: string; bio: string }; index: number }) {
+function TeamCard({ member, index }: { member: { name: string; role: string; bio: string; image?: string; imagePosition?: string }; index: number }) {
   const [hovered, setHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -36,8 +36,18 @@ function TeamCard({ member, index }: { member: { name: string; role: string; bio
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
     >
-      <div className="w-[60px] h-[60px] rounded-full border border-[#09B309]/30 bg-[#09B309]/10 flex items-center justify-center">
-        <span className="text-[16px] font-bold text-[#09B309]">{initials}</span>
+      <div className="w-[60px] h-[60px] rounded-full border border-[#09B309]/30 bg-[#09B309]/10 flex items-center justify-center overflow-hidden">
+        {member.image ? (
+          <Image
+            src={member.image}
+            alt={member.name}
+            width={60}
+            height={60}
+            className={`w-full h-full object-cover ${member.imagePosition || ""}`}
+          />
+        ) : (
+          <span className="text-[16px] font-bold text-[#09B309]">{initials}</span>
+        )}
       </div>
 
       <h4 className={`text-[16px] font-bold leading-[24px] mt-3 transition-colors duration-300 ${
@@ -409,19 +419,23 @@ export default function AboutPage() {
                   bio: "A seasoned public sector leader with deep experience in regional development and government operations. She brings strategic insight into policy alignment, institutional partnerships, and large-scale environmental initiatives.",
                 },
                 {
-                  name: "Nicolas (UK)",
+                  name: "Nicolas Oviasogie",
                   role: "Director",
-                  bio: "An international business professional with exposure to global markets and investment ecosystems. Nicolas contributes strategic guidance in scaling WasteWise for international relevance and investor alignment.",
+                  bio: "A UK-based Public Health graduate with a strong passion for global development, environmental sustainability, and community well-being. Nicolas is committed to tackling pressing health and environmental challenges through innovative solutions that align with WasteWise's mission to build cleaner, healthier communities.",
+                  image: "/images/team/nicolas.jpeg",
                 },
                 {
                   name: "Afekemor Gift",
                   role: "Founder & Chief Executive Officer",
                   bio: "A technology entrepreneur, software developer, and project strategist with extensive experience in building scalable digital solutions. Gift leads WasteWise with a clear vision to transform waste management through innovation, partnerships, and execution excellence.",
+                  image: "/images/team/gift-afekemor.jpeg",
                 },
                 {
                   name: "Index Afekemor",
                   role: "Co-Founder",
-                  bio: "A forward-thinking entrepreneur with a strong passion for innovation and systems development. Index plays a key role in shaping the strategic direction and growth framework of WasteWise.",
+                  bio: "Index Afekemor is a Global HR and Business Development Expert with over 15 years of experience in human capital management and digital growth. He is known for driving sustainable business performance, building high-performing teams, and leading strategic transformation across international markets.",
+                  image: "/images/team/index-afekemor.jpeg",
+                  imagePosition: "object-top",
                 },
               ].map((member, i) => (
                 <TeamCard key={member.name} member={member} index={i} />
