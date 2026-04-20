@@ -48,6 +48,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${rethinkSans.variable} ${plusJakarta.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('theme')||'light';if(t==='dark'){document.documentElement.classList.add('dark');}}catch(e){}})();`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-[family-name:var(--font-inter)] bg-white dark:bg-[#0F1210] text-[#171C1A] dark:text-[#E8EDE8] transition-colors duration-300">
         <ThemeProvider>
           <LenisProvider>

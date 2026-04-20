@@ -411,12 +411,13 @@ export default function AboutPage() {
               Board of Directors
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[10px] sm:gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[10px] sm:gap-5">
               {[
                 {
-                  name: "Mrs. Judith Aiyesan",
-                  role: "NDDC Director",
-                  bio: "A seasoned public sector leader with deep experience in regional development and government operations. She brings strategic insight into policy alignment, institutional partnerships, and large-scale environmental initiatives.",
+                  name: "Afekemor Gift",
+                  role: "Founder & Chief Executive Officer",
+                  bio: "A technology entrepreneur, software developer, and project strategist with extensive experience in building scalable digital solutions. Gift leads WasteWise with a clear vision to transform waste management through innovation, partnerships, and execution excellence.",
+                  image: "/images/team/gift-afekemor.jpeg",
                 },
                 {
                   name: "Nicolas Oviasogie",
@@ -425,15 +426,9 @@ export default function AboutPage() {
                   image: "/images/team/nicolas.jpeg",
                 },
                 {
-                  name: "Afekemor Gift",
-                  role: "Founder & Chief Executive Officer",
-                  bio: "A technology entrepreneur, software developer, and project strategist with extensive experience in building scalable digital solutions. Gift leads WasteWise with a clear vision to transform waste management through innovation, partnerships, and execution excellence.",
-                  image: "/images/team/gift-afekemor.jpeg",
-                },
-                {
-                  name: "Index Afekemor",
+                  name: "Afekemor Index",
                   role: "Co-Founder",
-                  bio: "Index Afekemor is a Global HR and Business Development Expert with over 15 years of experience in human capital management and digital growth. He is known for driving sustainable business performance, building high-performing teams, and leading strategic transformation across international markets.",
+                  bio: "Afekemor Index is a Global HR and Business Development Expert with over 15 years of experience in human capital management and digital growth. He is known for driving sustainable business performance, building high-performing teams, and leading strategic transformation across international markets.",
                   image: "/images/team/index-afekemor.jpeg",
                   imagePosition: "object-top",
                 },
@@ -481,12 +476,52 @@ export default function AboutPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
           >
-            WasteWise is building a robust ecosystem through collaborations with licensed waste collection vendors, recycling companies and processing partners, government agencies and environmental bodies, and private estates and commercial organizations.
+            WasteWise is actively building a robust and sustainable waste management ecosystem by fostering strong collaborations with key stakeholders across the value chain. At the core of this ecosystem is its partnership with the Rivers State Waste Management Agency (RIWAMA), which provides regulatory alignment, operational support, and access to government-backed waste infrastructure. This collaboration ensures that WasteWise operates within established environmental standards while leveraging public-sector resources to scale its impact.
           </motion.p>
+
+          {/* Featured Partner: RIWAMA */}
+          <motion.div
+            className="w-full mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+          >
+            <div className="relative bg-white dark:bg-[#1A211A] border border-[#09B309]/30 rounded-[16px] overflow-hidden">
+              <div
+                className="absolute inset-0 pointer-events-none opacity-60"
+                style={{
+                  background: "radial-gradient(80% 120% at 0% 0%, rgba(9, 179, 9, 0.12) 0%, rgba(9, 179, 9, 0) 60%)",
+                }}
+              />
+              <div className="relative flex flex-col sm:flex-row items-center gap-4 sm:gap-5 p-5 sm:p-6">
+                <div className="flex-shrink-0 w-[88px] h-[88px] sm:w-[104px] sm:h-[104px] rounded-[14px] bg-white flex items-center justify-center p-2 ring-1 ring-[#E3E8E3]">
+                  <Image
+                    src="/images/partners/riwama.jpeg"
+                    alt="Rivers State Waste Management Agency (RIWAMA)"
+                    width={104}
+                    height={104}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+                <div className="flex-1 flex flex-col gap-1.5 text-center sm:text-left">
+                  <span className="text-[11px] font-bold leading-[14px] tracking-[1px] uppercase text-[#09B309]">
+                    Core Government Partner
+                  </span>
+                  <h3 className="text-[18px] sm:text-[20px] font-bold leading-[26px] text-[#171C1A] dark:text-white">
+                    Rivers State Waste Management Agency (RIWAMA)
+                  </h3>
+                  <p className="text-[13px] sm:text-[14px] leading-[22px] text-[#6D7873]">
+                    Regulatory alignment, operational support, and access to government-backed waste infrastructure.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
 
           {/* Partner cards */}
           <motion.div
-            className="w-full flex flex-col sm:grid sm:grid-cols-2 gap-2 sm:gap-4 mt-6"
+            className="w-full flex flex-col sm:grid sm:grid-cols-2 gap-2 sm:gap-4 mt-2 sm:mt-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

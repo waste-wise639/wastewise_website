@@ -1,12 +1,35 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { ArrowRight, PlayFilledAlt } from "@carbon/icons-react";
+import { ArrowRight, PlayFilledAlt, Close } from "@carbon/icons-react";
 
 const avatars = ["A", "B", "C", "D"];
 
 export default function Hero() {
+  const [demoOpen, setDemoOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (!demoOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDemoOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [demoOpen]);
+
+  const closeDemo = () => {
+    videoRef.current?.pause();
+    setDemoOpen(false);
+  };
+
   return (
     <section className="pt-[68px] md:pt-[80px] bg-white dark:bg-[#0F1210] relative overflow-hidden">
       {/* Mobile gradient bg */}
@@ -81,6 +104,7 @@ export default function Hero() {
               <ArrowRight size={11} className="lg:w-4 lg:h-4" />
             </motion.a>
             <motion.button
+              onClick={() => setDemoOpen(true)}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="flex items-center gap-[11px] lg:gap-4 px-[22px] lg:px-8 h-[33px] lg:h-12 bg-transparent border border-[#D3DAD3] lg:border-[#E3E8E3] dark:border-white/20 text-[#171C1A] dark:text-white text-[11px] lg:text-base font-medium rounded-full shadow-[0px_1px_1.4px_rgba(0,0,0,0.05)]"
@@ -177,6 +201,70 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
+
+      {/* Watch Demo Modal */}
+      <AnimatePresence>
+        {demoOpen && (
+          <motion.div
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            {/* Backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-black/75 backdrop-blur-sm"
+              onClick={closeDemo}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            {/* Modal content */}
+            <motion.div
+              className="relative w-full max-w-[960px] aspect-video"
+              initial={{ scale: 0.9, y: 24, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 12, opacity: 0 }}
+              transition={{ type: "spring", damping: 22, stiffness: 260 }}
+            >
+              {/* Glow */}
+              <div
+                className="absolute -inset-2 rounded-[24px] pointer-events-none"
+                style={{
+                  background: "linear-gradient(135deg, rgba(9,179,9,0.35) 0%, rgba(9,179,9,0.05) 100%)",
+                  filter: "blur(24px)",
+                }}
+              />
+
+              {/* Close button */}
+              <motion.button
+                onClick={closeDemo}
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                className="absolute -top-3 -right-3 sm:-top-4 sm:-right-4 z-10 w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full bg-white text-[#171C1A] shadow-lg"
+                aria-label="Close demo video"
+              >
+                <Close size={20} />
+              </motion.button>
+
+              {/* Video frame */}
+              <div className="relative w-full h-full rounded-[16px] sm:rounded-[20px] overflow-hidden bg-black ring-1 ring-white/10 shadow-2xl">
+                <video
+                  ref={videoRef}
+                  src="/videos/demo.mp4"
+                  className="w-full h-full object-cover"
+                  controls
+                  autoPlay
+                  playsInline
+                  preload="metadata"
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
