@@ -1,0 +1,14 @@
+RewriteEngine On
+
+# Remove trailing slash (except for directories)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+# If the request is not a file or directory, serve the .html version
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L]
+
+# Handle directory index
+DirectoryIndex index.html
