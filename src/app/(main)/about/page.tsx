@@ -36,17 +36,17 @@ function TeamCard({ member, index }: { member: { name: string; role: string; bio
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
     >
-      <div className="w-[60px] h-[60px] rounded-full border border-[#09B309]/30 bg-[#09B309]/10 flex items-center justify-center overflow-hidden">
+      <div className="w-[80px] h-[80px] rounded-full border border-[#09B309]/30 bg-[#09B309]/10 flex items-center justify-center overflow-hidden">
         {member.image ? (
           <Image
             src={member.image}
             alt={member.name}
-            width={60}
-            height={60}
+            width={80}
+            height={80}
             className={`w-full h-full object-cover ${member.imagePosition || ""}`}
           />
         ) : (
-          <span className="text-[16px] font-bold text-[#09B309]">{initials}</span>
+          <span className="text-[18px] font-bold text-[#09B309]">{initials}</span>
         )}
       </div>
 
@@ -60,7 +60,7 @@ function TeamCard({ member, index }: { member: { name: string; role: string; bio
         {member.role}
       </span>
 
-      <p className={`text-[12px] leading-[20px] mt-2 transition-colors duration-300 ${
+      <p className={`text-[12px] leading-[20px] mt-2 transition-colors duration-300 whitespace-pre-line ${
         active ? "text-white/70" : "text-[#6D7873]"
       }`}>
         {member.bio}
@@ -427,8 +427,8 @@ export default function AboutPage() {
                 },
                 {
                   name: "Afekemor Index",
-                  role: "Co-Founder",
-                  bio: "Afekemor Index is a Global HR and Business Development Expert with over 15 years of experience in human capital management and digital growth. He is known for driving sustainable business performance, building high-performing teams, and leading strategic transformation across international markets.",
+                  role: "Portfolio Co-Founder",
+                  bio: "Index Afekemor is a Corporate Transformation Specialist (People • Systems • Structure) and Business Development Expert with over 15 years of experience helping organizations move from chaos to structured, high-performing systems.\n\nHe aligns people, processes, and business structure to drive efficiency, clarity, and sustainable growth, combining strategic insight with strong emotional intelligence to deliver measurable results.\n\nHe holds certifications from the University of Virginia and the Digital Marketing Institute, with international experience across the US, UK, and Australia.",
                   image: "/images/team/index-afekemor.jpeg",
                   imagePosition: "object-top",
                 },

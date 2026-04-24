@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[7084,["/_next/static/chunks/0v3d0ipc.rkwg.js","/_next/static/chunks/0yl_3j55~ub5y.js"],"ViewportBoundary"]
+3:I[7084,["/_next/static/chunks/0v3d0ipc.rkwg.js","/_next/static/chunks/0yl_3j55~ub5y.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+5:I[89821,["/_next/static/chunks/0v3d0ipc.rkwg.js","/_next/static/chunks/0yl_3j55~ub5y.js"],"IconMark"]
+0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"WasteWise - Smart Waste Management"}],["$","meta","1",{"name":"description","content":"Connecting households and businesses with recyclers and waste managers for a sustainable future."}],["$","link","2",{"rel":"icon","href":"/icon.jpg?icon.0i8c-h-g8blen.jpg","sizes":"1600x1585","type":"image/jpeg"}],["$","$L5","3",{}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"so7g-2KJoPlE524bmHRcA"}
